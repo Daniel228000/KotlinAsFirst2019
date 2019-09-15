@@ -51,7 +51,7 @@ fun daysInMonth(month: Int, year: Int): Int {
         2 -> return if (year % 4 == 0) 29 else 28
         4, 6, 9, 11 -> return 30
     }
-    return 1234567890
+    return error("Error")
 }
 
 /**

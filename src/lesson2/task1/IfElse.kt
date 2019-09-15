@@ -125,7 +125,7 @@ fun whichRookThreatens(
         return 2
     else if ((!x1 || !y1) && (!x2 || !y2))
         return 0
-    return 12345
+    return error("Error")
 }
 
 /**
@@ -158,7 +158,7 @@ fun rookOrBishopThreatens(
         return 0
     else if (x && y && xy)
         return 3
-    return 12345
+    return error("Error")
 }
 
 /**
@@ -181,7 +181,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         return 0
     else if (cos1 > 1.0 || cos2 > 1.0 || cos3 > 1.0)
         return 2
-    return 12345
+    return error("Error")
 }
 
 /**
