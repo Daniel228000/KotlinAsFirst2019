@@ -117,12 +117,19 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double = TODO()
 
-/**
- * Простая
- *
- * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
- */
+
+
+
+    /**
+     * Простая
+     *
+     * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
+     */
+
+
+
 fun mean(list: List<Double>): Double = TODO()
+//    list.sum() / list.size
 
 /**
  * Средняя
@@ -132,7 +139,13 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): Double = TODO()
+//    val sr = list.sum() / list.size
+//    for (i in 0 until list.size) {
+//        list[i] = list[i] - sr
+//    }
+//    return 9999999.0
+//}
 
 /**
  * Средняя
@@ -142,6 +155,12 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int = TODO()
+
+
+
+
+
+
 
 /**
  * Средняя
@@ -164,6 +183,13 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+//    var sum = list.first()
+//    for (i in 1 until list.size) {
+//        sum += list[i]
+//        list[i] = sum
+//    }
+//    return list
+//}
 
 /**
  * Средняя
@@ -236,7 +262,19 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
+
 fun roman(n: Int): String = TODO()
+
+
+fun quantityNumeral(n: Int): Int = TODO()
+//    var c = 0
+//    var num = n
+//    while (num > 0) {
+//        c += 1
+//        num /= 10
+//    }
+//    return c
+//}
 
 /**
  * Очень сложная
@@ -246,3 +284,9 @@ fun roman(n: Int): String = TODO()
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
 fun russian(n: Int): String = TODO()
+
+
+
+
+
+

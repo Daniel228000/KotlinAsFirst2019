@@ -321,6 +321,19 @@ fun squareSequenceDigit(n: Int): Int {
 
 }
 
+
+fun quantityNumeral(n: Int): Int {
+    //забыл, что закомментировал эту функцию
+    var c = 0
+    var num = n
+    while (num > 0) {
+        c += 1
+        num /= 10
+    }
+    return c
+}
+
+
 /**
  * Сложная
  *
