@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import kotlin.math.sqrt
+import kotlin.math.*
 
 /**
  * Пример
@@ -118,18 +119,15 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
 fun abs(v: List<Double>): Double = TODO()
 
 
-
-
-    /**
-     * Простая
-     *
-     * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
-     */
-
+/**
+ * Простая
+ *
+ * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
+ */
 
 
 fun mean(list: List<Double>): Double = TODO()
-//    list.sum() / list.size
+   // list.sum() / list.size
 
 /**
  * Средняя
@@ -139,14 +137,14 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): Double = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> = TODO()
 //    val sr = list.sum() / list.size
 //    for (i in 0 until list.size) {
 //        list[i] = list[i] - sr
 //    }
-//    return 9999999.0
+//    return list
 //}
-
+//
 /**
  * Средняя
  *
@@ -155,11 +153,6 @@ fun center(list: MutableList<Double>): Double = TODO()
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int = TODO()
-
-
-
-
-
 
 
 /**
@@ -171,6 +164,12 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Значение пустого многочлена равно 0 при любом x.
  */
 fun polynom(p: List<Int>, x: Int): Int = TODO()
+//    var result = mutableListOf<Int>()
+//    for (i in p.indices) {
+//        x.toDouble()
+//        result = p[i] * x.pow(i)
+//    }
+//}
 
 /**
  * Средняя
@@ -184,12 +183,12 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
 //    var sum = list.first()
-//    for (i in 1 until list.size) {
+        //    for (i in 1 until list.size) {
 //        sum += list[i]
-//        list[i] = sum
-//    }
-//    return list
-//}
+                //        list[i] = sum
+                //    }
+        //    return list
+            //}
 
 /**
  * Средняя
@@ -199,6 +198,18 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Множители в списке должны располагаться по возрастанию.
  */
 fun factorize(n: Int): List<Int> = TODO()
+//    var i = 1
+//    var k = n
+//    var result = mutableListOf<Int>()
+//    while (k > 0){
+//        i += 1
+//        while (k % i == 0){
+//            k /= i
+//            result.add(i)
+//        }
+//    }
+//    return result
+//}
 
 /**
  * Сложная
@@ -207,7 +218,7 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = TODO() //factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя
@@ -217,6 +228,14 @@ fun factorizeToString(n: Int): String = TODO()
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> = TODO()
+//   var result = mutableListOf<Int>()
+//    var b = n
+//    while (b > 0) {
+//        result.add(0, b % base)
+//        b /= base
+//    }
+//    return result
+//}
 
 /**
  * Сложная
@@ -230,6 +249,22 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * (например, n.toString(base) и подобные), запрещается.
  */
 fun convertToString(n: Int, base: Int): String = TODO()
+//    var result = mutableListOf<Int>()
+//    val x: Int
+//    var b = n
+//    while (b > 0) {
+//        result.add(0, b % base)
+//        b /= base
+//    }
+//    result.joinToString()
+//    when {
+//        10 in result ->
+//
+//    }
+
+
+
+ //   }
 
 /**
  * Средняя
@@ -265,16 +300,6 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
 
 fun roman(n: Int): String = TODO()
 
-
-fun quantityNumeral(n: Int): Int = TODO()
-//    var c = 0
-//    var num = n
-//    while (num > 0) {
-//        c += 1
-//        num /= 10
-//    }
-//    return c
-//}
 
 /**
  * Очень сложная
