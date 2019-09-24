@@ -3,7 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
-import lesson4.task1.quantityNumeral
+
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -105,7 +105,7 @@ fun fib(n: Int): Int = fibonacci(n)
  */
 fun lcm(m: Int, n: Int): Int {
     var x = 0
-    while (x / m != 0 && x / n != 0) {
+    while (x % m != 0 && x % n != 0) {
         x += 1
     }
     return x
@@ -117,11 +117,11 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (i in 2..n / 2) {
-        if (n / i == 0)
+    for (i in 2 until (n / 2) + 1) {
+        if (n % i == 0)
             return i
     }
-    return 12345
+    return error("")
 }
 
 /**
@@ -132,7 +132,7 @@ fun minDivisor(n: Int): Int {
 fun maxDivisor(n: Int): Int {
     var maxi = 1
     for (i in 2 until n) {
-        if (n / i == 0) {
+        if (n % i == 0) {
             maxi = Max(maxi, i)
         }
     }
@@ -140,7 +140,7 @@ fun maxDivisor(n: Int): Int {
 }
 
 fun Max(maxi: Int, i: Int): Int {
-    return if (maxi > i)
+    return if (maxi >= i)
         maxi
     else i
 
@@ -290,6 +290,16 @@ fun hasDifferentDigits(n: Int): Boolean {
     }; return false
 }
 
+fun quantityNumeral(n: Int): Int {
+    var c = 0
+    var num = n
+    while (num > 0) {
+        c += 1
+        num /= 10
+    }
+    return c
+}
+
 /**
  * Сложная
  *
@@ -300,13 +310,34 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int {
-    var i = 1
-    var c = 0
-    var quantity = 0
+    // var i = 2
+    // var c = 1
+    // var quantity = 1
+    // while (quantity < n) {
+    //     for (j in 1..quantityNumeral(sqr(i))) {
+    //         c *= 10
+    //     }
+    //     c += sqr(i)
+    //     quantity += quantityNumeral(sqr(i))
+    //     i += 1
+    // }
+    // return if (quantity == n)
+    //     c % 10
+    // else {
+    //     for (b in 1..quantity - n) {
+    //         c /= 10
+    //     }
+    //     return c % 10
+    // }
+
+//почему то такой вариант не работает, не могу найти ошибку.Нижний лучше так как не сохраняет огромное число в памяти.
+    /////////////////////////////////////////////////////////////
+    var i = 2
+    var c = 1
+    var quantity = 1
     while (quantity < n) {
-        i *= i
-        c = i
-        quantity += quantityNumeral(i)
+        c = sqr(i)
+        quantity += quantityNumeral(sqr(i))
         i += 1
     }
     return if (quantity == n)
@@ -322,18 +353,6 @@ fun squareSequenceDigit(n: Int): Int {
 }
 
 
-fun quantityNumeral(n: Int): Int {
-    //забыл, что закомментировал эту функцию
-    var c = 0
-    var num = n
-    while (num > 0) {
-        c += 1
-        num /= 10
-    }
-    return c
-}
-
-
 /**
  * Сложная
  *
@@ -344,24 +363,21 @@ fun quantityNumeral(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var i = 1
-    var c = 0
-    var x = 0
-    var quantity = 0
+    var i = 2
+    var c = 1
+    var quantity = 1
     while (quantity < n) {
         c = fibonacci(i)
-        x = c
         quantity += quantityNumeral(c)
         i += 1
-        c = 0
     }
     return if (quantity == n)
-        x % 10
+        c % 10
     else {
         for (b in 1..quantity - n) {
-            x /= 10
+            c /= 10
         }
-        return x % 10
+        return c % 10
     }
 }
 

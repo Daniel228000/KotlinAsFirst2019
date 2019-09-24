@@ -21,8 +21,14 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean =
-    number % 10 + number % 100 == number % 1000 + number % 10000
+fun isNumberHappy(number: Int): Boolean {
+    val a = number % 10
+    val b = (number % 100 - a) / 10
+    val c = (number % 1000 - number % 100) / 100
+    val d = (number % 10000 - number % 1000) / 1000
+    return (a + b) == (c + d)
+}
+
 
 /**
  * Простая
@@ -50,8 +56,8 @@ fun daysInMonth(month: Int, year: Int): Int {
         1, 3, 5, 7, 8, 10, 12 -> return 31
         2 -> return if (year % 4 == 0) 29 else 28
         4, 6, 9, 11 -> return 30
+        else -> return error("Error")
     }
-    return error("Error")
 }
 
 /**
@@ -64,7 +70,7 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r2 <= r1
+): Boolean = sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2
 
 /**
  * Средняя
@@ -76,11 +82,18 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun Min(a: Int, b: Int): Int {
-    return if (a < b)
+    return if (a <= b)
         a
     else
         b
 }
 
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-    Max(Max(a, b), c) <= Max(r, s) && Max(Min(a, b), Min(Max(a, b), c)) <= Min(r, s)
+
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    val max = Max(r, s)
+    val min = Min(r, s)
+    val MAX1 = Max(Max(a, b), Max(b, c))
+    val msx5 = Max(Min(a, b), Min(b, c))
+    return (MAX1 <= max) && (msx5 <= min)
+}
+

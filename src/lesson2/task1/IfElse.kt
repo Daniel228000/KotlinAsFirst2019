@@ -75,7 +75,7 @@ fun ageDescription(age: Int): String {
             in 5..9, 0 -> return ("$age лет")
         }
     }
-    return("Число не подходит")
+    return ("Число не подходит")
 }
 
 /**
@@ -91,11 +91,12 @@ fun timeForHalfWay(
     t3: Double, v3: Double
 ): Double {
     val halfway: Double = (v1 * t1 + v2 * t2 + v3 * t3) / 2.0
-    return when {
-        v1 * t1 > halfway -> halfway / v1
-        v1 * t1 + v2 * t2 > halfway -> (t1 + halfway - v1 * t1) / v2
-        else -> t1 + t2 + (halfway - v1 * t1 + v2 * t2) / v3
-    }
+
+    return if (v1 * t1 + v2 * t2 > halfway) {
+        t1 + (halfway - v1 * t1) / v2
+    } else if (v1 * t1 > halfway) {
+        halfway / v1
+    } else t1 + t2 + (halfway - v1 * t1 + v2 * t2) / v3
 }
 
 /**
@@ -118,7 +119,7 @@ fun whichRookThreatens(
     val y2 = kingY == rookY2
 
     if ((x1 || y1) && (x2 || y2))
-        return 2
+        return 3
     else if ((x1 || y1) && (!x2 || !y2))
         return 1
     else if ((!x1 || !y1) && (x2 || y2))
@@ -156,9 +157,9 @@ fun rookOrBishopThreatens(
         return 2
     else if (!x && !y && !xy)
         return 0
-    else if (x && y && xy)
+    else if (x || y && xy)
         return 3
-    return error("Error")
+    else return (123) //error("Error")
 }
 
 /**
@@ -177,11 +178,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         return -1
     if (cos1 == 0.0 || cos2 == 0.0 || cos3 == 0.0)
         return 1
-    else if (cos1 in 0.0..1.0 && cos2 in 0.0..1.0 && cos3 in 0.0..1.0)
+    else if ((cos1 > 0.0 && cos1 < 1.0) && (cos1 > 0.0 && cos1 < 1.0) && (cos1 > 0.0 && cos1 < 1.0))
         return 0
-    else if (cos1 > 1.0 || cos2 > 1.0 || cos3 > 1.0)
+    else if (cos1 < 0.0 || cos2 < 0.0 || cos3 < 0.0)
         return 2
-    return error("Error")
+    return error("qq")
 }
 
 /**
