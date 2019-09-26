@@ -91,7 +91,7 @@ fun digitNumber(n: Int): Int {
  */
 fun fib(n: Int): Int {
     var a = 1
-    var b = 2
+    var b = 1
     var c = 0
     return if ((n == 1) || (n == 2)) {
         1
