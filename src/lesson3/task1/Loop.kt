@@ -81,12 +81,6 @@ fun digitNumber(n: Int): Int {
 }
 
 
-fun fibonacci(n: Int): Int {
-    return if (n in 1..2)
-        1
-    else
-        fibonacci(n - 1) + fibonacci(n - 2)
-}
 
 
 /**
@@ -95,7 +89,21 @@ fun fibonacci(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = fibonacci(n)
+fun fib(n: Int): Int {
+    var a = 1
+    var b = 2
+    var c = 0
+    return if ((n == 1) || (n == 2)) {
+        1
+    } else {
+        for (i in 1..n - 2) {
+            c = a + b
+            a = b
+            b = c
+        }
+        c
+    }
+}
 
 /**
  * Простая
@@ -105,7 +113,7 @@ fun fib(n: Int): Int = fibonacci(n)
  */
 fun lcm(m: Int, n: Int): Int {
     var x = 0
-    while (x % m != 0 && x % n != 0) {
+    while ((x % m != 0) && (x % n != 0)) {
         x += 1
     }
     return x
@@ -117,7 +125,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (i in 2 until (n / 2) + 1) {
+    for (i in 2 until n + 1) {
         if (n % i == 0)
             return i
     }
@@ -129,17 +137,17 @@ fun minDivisor(n: Int): Int {
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int {
-    var maxi = 1
-    for (i in 2 until n) {
-        if (n % i == 0) {
-            maxi = Max(maxi, i)
-        }
-    }
-    return maxi
-}
+fun maxDivisor(n: Int): Int = n / minDivisor(n)
+//    var maxi = 1
+//    for (i in 2 until n) {
+//        if (n % i == 0) {
+//            maxi = Max(maxi, i)
+//        }
+//    }
+//    return maxi
+//}
 
-fun Max(maxi: Int, i: Int): Int {
+fun max(maxi: Int, i: Int): Int {
     return if (maxi >= i)
         maxi
     else i
@@ -154,9 +162,9 @@ fun Max(maxi: Int, i: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    val maxi = Max(m, n)
+    val maxi = max(m, n)
     for (i in 1..maxi) {
-        if (m / i == 0 && n / i == 0) {
+        if (m % i == 0 && n % i == 0) {
             return false
         }
     }
@@ -171,7 +179,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    for (j in 1..sqrt(n.toDouble()).toInt()) {
+    for (j in sqrt(m.toDouble()).toInt()..sqrt(n.toDouble()).toInt()) {
         if (sqr(j) in m..n)
             return true
     }
@@ -258,18 +266,7 @@ fun revert(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean {
-    var a = n
-    var b = 0
-    while (n > 0) {
-        b *= 10
-        b += a % 10
-        a /= 10
-    }
-
-    return b == n
-}
-
+fun isPalindrome(n: Int): Boolean = (n == revert(n))
 
 /**
  * Средняя
@@ -287,7 +284,8 @@ fun hasDifferentDigits(n: Int): Boolean {
         if (num % 10 != last)
             return true
         else num /= 10
-    }; return false
+    }
+    return false
 }
 
 fun quantityNumeral(n: Int): Int {
@@ -367,7 +365,7 @@ fun fibSequenceDigit(n: Int): Int {
     var c = 1
     var quantity = 1
     while (quantity < n) {
-        c = fibonacci(i)
+        c = fib(i)
         quantity += quantityNumeral(c)
         i += 1
     }

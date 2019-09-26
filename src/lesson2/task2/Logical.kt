@@ -3,7 +3,7 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
-import lesson3.task1.Max
+import lesson3.task1.max
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -52,11 +52,11 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int {
-    when (month) {
-        1, 3, 5, 7, 8, 10, 12 -> return 31
-        2 -> return if (year % 4 == 0) 29 else 28
-        4, 6, 9, 11 -> return 30
-        else -> return error("Error")
+    return when (month) {
+        1, 3, 5, 7, 8, 10, 12 -> 31
+        2 -> if (year % 4 == 0) 29 else 28
+        4, 6, 9, 11 -> 30
+        else -> error("Error")
     }
 }
 
@@ -81,19 +81,18 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun Min(a: Int, b: Int): Int {
+fun min(a: Int, b: Int): Int {
     return if (a <= b)
         a
     else
         b
 }
 
-
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    val max = Max(r, s)
-    val min = Min(r, s)
-    val MAX1 = Max(Max(a, b), Max(b, c))
-    val msx5 = Max(Min(a, b), Min(b, c))
-    return (MAX1 <= max) && (msx5 <= min)
+    val max = max(r, s)
+    val min = min(r, s)
+    val max3 = max(max(a, b), max(b, c))
+    val msx5 = max(min(a, b), min(b, c))
+    return (max3 <= max) && (msx5 <= min)
 }
 
