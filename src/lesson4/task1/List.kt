@@ -389,7 +389,7 @@ fun russian(n: Int): String {
     }
 
 
-
+//qq
     if ((e == 0) && (quantityNumeral(n) >= 4)) {
         when (n % d) {
             0 -> four = ("")
