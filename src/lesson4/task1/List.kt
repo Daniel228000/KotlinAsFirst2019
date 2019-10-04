@@ -328,7 +328,6 @@ fun russian(n: Int): String {
     var four: String = ("")
     var five: String = ("")
     var six: String = ("")
-    var word: String = ("")
     val first = mutableListOf<String>(
         "один",                // 0
         "два",                 // 1
@@ -376,7 +375,11 @@ fun russian(n: Int): String {
     else ("")
 
     if ((a != 0) && (b != 0)) {
-        two = first[9 + a]
+        if (b == 1) {
+        two = first[9 + a]}
+        else 
+            two = first[17 + b]
+        one = first[a - 1]
     } else if ((a == 0) && (b != 0)) {
         one = ("")
         two = first[9 + a]
@@ -410,8 +413,7 @@ fun russian(n: Int): String {
         first[26 + g]
     } else
         ("")
-    word = six + five + four + three + two + one
-    return word
+    return "$six $five $four $three $two $one"
 }
 
 
