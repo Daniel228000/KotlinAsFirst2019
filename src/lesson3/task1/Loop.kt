@@ -71,16 +71,14 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var c = 0
+    var c = 1
     var num = n
-    while (num > 0) {
+    while (num / 10 > 0) {
         c += 1
         num /= 10
     }
     return c
 }
-
-
 
 
 /**
@@ -125,11 +123,12 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (i in 2 until n + 1) {
-        if (n % i == 0)
-            return i
+    for (i in 2 until n - 1) {
+        return if (n % i == 0)
+            i
+        else continue
     }
-    return error("")
+    return n
 }
 
 /**
@@ -138,6 +137,9 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int = n / minDivisor(n)
+
+
+
 //    var maxi = 1
 //    for (i in 2 until n) {
 //        if (n % i == 0) {
@@ -146,14 +148,6 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
 //    }
 //    return maxi
 //}
-
-fun max(maxi: Int, i: Int): Int {
-    return if (maxi >= i)
-        maxi
-    else i
-
-}
-
 /**
  * Простая
  *
@@ -335,7 +329,7 @@ fun squareSequenceDigit(n: Int): Int {
     var quantity = 1
     while (quantity < n) {
         c = sqr(i)
-        quantity += quantityNumeral(sqr(i))
+        quantity += digitNumber(sqr(i))
         i += 1
     }
     return if (quantity == n)
@@ -366,7 +360,7 @@ fun fibSequenceDigit(n: Int): Int {
     var quantity = 1
     while (quantity < n) {
         c = fib(i)
-        quantity += quantityNumeral(c)
+        quantity += digitNumber(c)
         i += 1
     }
     return if (quantity == n)

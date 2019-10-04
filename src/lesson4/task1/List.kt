@@ -3,8 +3,8 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson3.task1.quantityNumeral
 import kotlin.math.sqrt
-import kotlin.math.*
 
 /**
  * Пример
@@ -126,8 +126,8 @@ fun abs(v: List<Double>): Double = TODO()
  */
 
 
-fun mean(list: List<Double>): Double = TODO()
-   // list.sum() / list.size
+fun mean(list: List<Double>): Double =
+    list.sum() / list.size
 
 /**
  * Средняя
@@ -137,14 +137,14 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
-//    val sr = list.sum() / list.size
-//    for (i in 0 until list.size) {
-//        list[i] = list[i] - sr
-//    }
-//    return list
-//}
-//
+fun center(list: MutableList<Double>): MutableList<Double> {
+    val sr = list.sum() / list.size
+    for (i in 0 until list.size) {
+        list[i] = list[i] - sr
+    }
+    return list
+}
+
 /**
  * Средняя
  *
@@ -163,13 +163,21 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int = TODO()
-//    var result = mutableListOf<Int>()
-//    for (i in p.indices) {
-//        x.toDouble()
-//        result = p[i] * x.pow(i)
-//    }
-//}
+fun polynom(p: List<Int>, x: Int): Int {
+    var result = 0
+    for (i in p.indices) {
+        result += p[i] * power(x, i)
+    }
+    return result
+}
+
+fun power(n: Int, x: Int): Int {
+    var num = n
+    for (i in 1..x) {
+        num *= num
+    }
+    return num
+}
 
 /**
  * Средняя
@@ -181,14 +189,14 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
-//    var sum = list.first()
-        //    for (i in 1 until list.size) {
-//        sum += list[i]
-                //        list[i] = sum
-                //    }
-        //    return list
-            //}
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var sum = list.first()
+    for (i in 1 until list.size) {
+        sum += list[i]
+        list[i] = sum
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -197,19 +205,19 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
-//    var i = 1
-//    var k = n
-//    var result = mutableListOf<Int>()
-//    while (k > 0){
-//        i += 1
-//        while (k % i == 0){
-//            k /= i
-//            result.add(i)
-//        }
-//    }
-//    return result
-//}
+fun factorize(n: Int): List<Int> {
+    var i = 1
+    var k = n
+    val result = mutableListOf<Int>()
+    while (k > 0) {
+        i += 1
+        while (k % i == 0) {
+            k /= i
+            result.add(i)
+        }
+    }
+    return result
+}
 
 /**
  * Сложная
@@ -218,7 +226,7 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO() //factorize(n).joinToString(separator = "*")
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя
@@ -227,15 +235,15 @@ fun factorizeToString(n: Int): String = TODO() //factorize(n).joinToString(separ
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
-//   var result = mutableListOf<Int>()
-//    var b = n
-//    while (b > 0) {
-//        result.add(0, b % base)
-//        b /= base
-//    }
-//    return result
-//}
+fun convert(n: Int, base: Int): List<Int> {
+    val result = mutableListOf<Int>()
+    var b = n
+    while (b > 0) {
+        result.add(0, b % base)
+        b /= base
+    }
+    return result
+}
 
 /**
  * Сложная
@@ -248,7 +256,7 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String = (convert(n, base).map { if (it > 9) it + 87 }).joinToString()
 //    var result = mutableListOf<Int>()
 //    val x: Int
 //    var b = n
@@ -263,8 +271,7 @@ fun convertToString(n: Int, base: Int): String = TODO()
 //    }
 
 
-
- //   }
+//   }
 
 /**
  * Средняя
@@ -308,7 +315,120 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val a = n % 10
+    val b = n / 10 % 10
+    val c = n / 100 % 10
+    val d = n / 1000 % 10
+    val e = n / 10000 % 10
+    val g = n / 100000 % 10
+    var one: String = ("")
+    var two: String = ("")
+    var three: String = ("")
+    var four: String = ("")
+    var five: String = ("")
+    var six: String = ("")
+    var word: String = ("")
+    val first = mutableListOf<String>(
+        "один",                // 0
+        "два",                 // 1
+        "три",                 // 2
+        "четыре",              // 3
+        "пять",                // 4
+        "шесть",               // 5
+        "семь",                // 6
+        "восемь",              // 7
+        "девять",              // 8
+        "десять",              // 9
+        "одиннадцать",         // 10
+        "двенадцать",          // 11
+        "тринадцать",          // 12
+        "четырнадцать",        // 13
+        "пятнадцать",          // 14
+        "шестнадцать",         // 15
+        "семнадцать",          // 16
+        "восемнадцать",        // 17
+        "девятнадцать",        // 18
+        "двадцать",            // 19
+        "тридцать",            // 20
+        "сорок",               // 21
+        "пятьдесят",           // 22
+        "шестьдесят",          // 23
+        "семьдесят",           // 24
+        "восемьдесят",         // 25
+        "девяносто",           // 26
+        "сто",                 // 27
+        "двести",              // 28
+        "триста",              // 29
+        "четыреста",           // 30
+        "пятьсот",             // 31
+        "шестьсот",            // 32
+        "семьсот",             // 33
+        "восемьсот",           // 34
+        "девятьсот",           // 35
+        "одна тысяча",         // 36
+        "тысячи",              // 37
+        "тысяч",               // 38
+        "две"                  // 39
+    )
+    three = if (quantityNumeral(n) >= 3)
+        first[26 + c]
+    else ("")
+
+    if ((a != 0) && (b != 0)) {
+        two = first[9 + a]
+    } else if ((a == 0) && (b != 0)) {
+        one = ("")
+        two = first[9 + a]
+    } else if ((a != 0) && (b == 0)) {
+        one = first[a - 1]
+        two = ("")
+    } else if ((a == 0) && (b == 0)) {
+        one = ("")
+        two = ("")
+    }
+
+
+
+    if ((e == 0) && (quantityNumeral(n) >= 4)) {
+        when (n % d) {
+            0 -> four = ("")
+            1 -> four = first[36]
+            2 -> four = first[39] + first[37]
+            3, 4 -> four = first[d - 1] + first[37]
+            in 5..9 -> four = first[d - 1] + first[38]
+        }
+    } else if (quantityNumeral(n) >= 5) {
+        when (e) {
+            1 -> five = first[9 + d] + first[38]
+            2 -> five = first[19] + first[39] + first[37]
+            3, 4 -> five = first[19] + first[d - 1] + first[37]
+            in 5..9 -> five = first[19] + first[d - 1] + first[38]
+        }
+    }
+    six = if (quantityNumeral(n) >= 6) {
+        first[26 + g]
+    } else
+        ("")
+    word = six + five + four + three + two + one
+    return word
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

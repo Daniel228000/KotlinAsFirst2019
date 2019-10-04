@@ -3,7 +3,6 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
-import lesson3.task1.max
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -54,7 +53,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
 fun daysInMonth(month: Int, year: Int): Int {
     return when (month) {
         1, 3, 5, 7, 8, 10, 12 -> 31
-        2 -> if (year % 4 == 0) 29 else 28
+        2 -> if (year % 4 != 0 || ((year % 400 != 0) && (year % 100 == 0))) 28 else 29
         4, 6, 9, 11 -> 30
         else -> error("Error")
     }
@@ -81,18 +80,13 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun min(a: Int, b: Int): Int {
-    return if (a <= b)
-        a
-    else
-        b
-}
+
 
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    val max = max(r, s)
-    val min = min(r, s)
-    val max3 = max(max(a, b), max(b, c))
-    val msx5 = max(min(a, b), min(b, c))
-    return (max3 <= max) && (msx5 <= min)
+    val maxOfTwo = maxOf(r, s)
+    val minOfTwo = minOf(r, s)
+    val minOfThree = minOf(a, b, c)
+    val secondMax = a + b + c - minOfThree - maxOf(a, b, c)
+    return (secondMax <= maxOfTwo) && (minOf(a, b, c) <= minOfTwo)
 }
 
