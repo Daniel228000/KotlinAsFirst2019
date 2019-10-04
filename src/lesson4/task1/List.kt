@@ -413,7 +413,7 @@ fun russian(n: Int): String {
         first[26 + g]
     } else
         ("")
-    return ("$six $five $four $three $two $one").trim()
+    return ("$six $five $four$three $two $one").trim()
 }
 
 
