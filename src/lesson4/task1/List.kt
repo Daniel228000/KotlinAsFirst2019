@@ -165,7 +165,7 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  */
 fun polynom(p: List<Int>, x: Int): Int {
     var result = 0
-    for (i in p.indices) {
+    for (i in 0..p.size - 1) {
         result += p[i] * power(x, i)
     }
     return result
@@ -403,10 +403,10 @@ fun russian(n: Int): String {
         }
     } else if (quantityNumeral(n) >= 5) {
         when (e) {
-            1 -> five = first[9 + d] + first[38]
-            2 -> five = first[19] + first[39] + first[37]
-            3, 4 -> five = first[19] + first[d - 1] + first[37]
-            in 5..9 -> five = first[19] + first[d - 1] + first[38]
+            1 -> five = first[9 + d] + (" ") + first[38]
+            2 -> five = first[19] + (" ") + first[39] + (" ") + first[37]
+            3, 4 -> five = first[19] + (" ") + first[d - 1] + (" ") + first[37]
+            in 5..9 -> five = first[19] + (" ") + first[d - 1] + (" ") + first[38]
         }
     }
     six = if (quantityNumeral(n) >= 6) {
