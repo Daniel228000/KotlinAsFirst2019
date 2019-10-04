@@ -375,10 +375,10 @@ fun russian(n: Int): String {
     else ("")
 
     if ((a != 0) && (b != 0)) {
-        if (b == 1) {
-        two = first[9 + a]}
-        else 
-            two = first[17 + b]
+        two = if (b == 1) {
+            first[9 + a]
+        } else
+            first[17 + b]
         one = first[a - 1]
     } else if ((a == 0) && (b != 0)) {
         one = ("")
@@ -413,7 +413,7 @@ fun russian(n: Int): String {
         first[26 + g]
     } else
         ("")
-    return "$six $five $four $three $two $one"
+    return ("$six $five $four $three $two $one").trim()
 }
 
 
