@@ -140,14 +140,7 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
 
 
 
-//    var maxi = 1
-//    for (i in 2 until n) {
-//        if (n % i == 0) {
-//            maxi = Max(maxi, i)
-//        }
-//    }
-//    return maxi
-//}
+
 /**
  * Простая
  *
@@ -282,15 +275,6 @@ fun hasDifferentDigits(n: Int): Boolean {
     return false
 }
 
-fun quantityNumeral(n: Int): Int {
-    var c = 0
-    var num = n
-    while (num > 0) {
-        c += 1
-        num /= 10
-    }
-    return c
-}
 
 /**
  * Сложная

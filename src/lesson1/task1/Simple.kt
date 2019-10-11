@@ -70,7 +70,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int =
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
-    (sagenes * 48.0 + arshins * 12.0 + vershoks) / 100 * 4.445
+    (sagenes * 48.0 + arshins * 16.0 + vershoks) / 100 * 4.445
 
 /**
  * Тривиальная

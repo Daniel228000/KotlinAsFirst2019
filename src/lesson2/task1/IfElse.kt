@@ -75,6 +75,7 @@ fun ageDescription(age: Int): String =
             in 5..9, 0 -> ("$age лет")
             else -> ("Число не подходит")
         }
+
 /**
  * Простая
  *
@@ -87,13 +88,16 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val halfway = (v1 * t1 + v2 * t2 + v3 * t3) / 2.0
+    val r1 = v1 * t1
+    val r2 = v2 * t2
+    val r3 = v3 * t3
+    val halfway = (r1 + r2 + r3) / 2.0
 
-    return if (v1 * t1 + v2 * t2 > halfway) {
-        t1 + (halfway - v1 * t1) / v2
-    } else if (v1 * t1 > halfway) {
-        halfway / v1
-    } else t1 + t2 + (halfway - v1 * t1 + v2 * t2) / v3
+    return when {
+        r1 >= halfway -> halfway / v1
+        r1 + r2 > halfway -> t1 + ((halfway - r1) / v2)
+        else -> t1 + t2 + ((halfway - r1 - r2) / v3)
+    }
 }
 
 /**
