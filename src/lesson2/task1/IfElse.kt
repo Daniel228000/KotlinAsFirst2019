@@ -179,7 +179,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         0
     else if (cos1 < 0.0 || cos2 < 0.0 || cos3 < 0.0)
         2
-    else error("qq")
+    else -1
 }
 
 /**
