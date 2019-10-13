@@ -395,7 +395,7 @@ fun russian(n: Int): String {
 
 //qq
     if ((e == 0) && (digitNumber(n) >= 4)) {
-        when (n % d) {
+        when (d) {
             0 -> four = ("")
             1 -> four = first[36]
             2 -> four = first[39] + first[37]
