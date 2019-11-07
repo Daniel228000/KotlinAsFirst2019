@@ -4,7 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson3.task1.digitNumber
-
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
@@ -127,8 +127,12 @@ fun abs(v: List<Double>): Double = TODO()
  */
 
 
-fun mean(list: List<Double>): Double =
-    list.sum() / list.size
+fun mean(list: List<Double>): Double {
+    if (list.isNotEmpty()) {
+        return (list.sum() / list.size)
+    } else
+        return 0.0
+}
 
 /**
  * Средняя
@@ -139,12 +143,15 @@ fun mean(list: List<Double>): Double =
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    val sr = list.sum() / list.size
-    for (i in 0 until list.size) {
-        list[i] = list[i] - sr
+    if (list.isNotEmpty()) {
+        val sr = list.sum() / list.size
+        for (i in 0 until list.size) {
+            list[i] = list[i] - sr
+        }
     }
     return list
 }
+
 
 /**
  * Средняя
@@ -164,21 +171,19 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int {
-    var result = 0
-    for (i in 0..p.size - 1) {
-        result += p[i] * power(x, i)
-    }
-    return result
-}
+fun polynom(p: List<Int>, x: Int): Int = TODO() //Int {
+//    if (p.isNotEmpty()) {
+//        var result = p[0]
+//        for (i in 1 until p.size) {
+//            result += p[i] * ((x.toDouble()).pow(i.toDouble())).toInt()
+//            if (i == p.size) {
+//               return  result}
+//            else result += 0
+//        }
+//    }
+//    return result
+//}
 
-fun power(n: Int, x: Int): Int {
-    var num = n
-    for (i in 1..x) {
-        num *= num
-    }
-    return num
-}
 
 /**
  * Средняя
@@ -191,10 +196,12 @@ fun power(n: Int, x: Int): Int {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
-    var sum = list.first()
-    for (i in 1 until list.size) {
-        sum += list[i]
-        list[i] = sum
+    if (list.isNotEmpty()) {
+        var sum = list.first()
+        for (i in 1 until list.size) {
+            sum += list[i]
+            list[i] = sum
+        }
     }
     return list
 }
@@ -210,7 +217,7 @@ fun factorize(n: Int): List<Int> {
     var i = 1
     var k = n
     val result = mutableListOf<Int>()
-    while (k > 0) {
+    while ((k > 0) && (i <= k)) {
         i += 1
         while (k % i == 0) {
             k /= i
@@ -323,13 +330,14 @@ fun russian(n: Int): String {
     val d = n / 1000 % 10
     val e = n / 10000 % 10
     val g = n / 100000 % 10
+
     var one: String = ("")
     var two: String = ("")
     var three: String = ("")
     var four: String = ("")
     var five: String = ("")
     var six: String = ("")
-    val first = mutableListOf<String>(
+    val words = mutableListOf<String>(
         "один ",                // 0
         "два ",                 // 1
         "три ",                 // 2
@@ -371,49 +379,48 @@ fun russian(n: Int): String {
         "тысяч ",               // 38
         "две "                  // 39
     )
-    three = if (digitNumber(n) >= 3)
-        first[26 + c]
-    else ("")
-
-    if ((a != 0) && (b != 0)) {
-        two = if (b == 1) {
-            first[9 + a]
-        } else
-            first[17 + b]
-        one = first[a - 1]
-    } else if ((a == 0) && (b != 0)) {
-        one = ("")
-        two = first[9 + a]
-    } else if ((a != 0) && (b == 0)) {
-        one = first[a - 1]
-        two = ("")
-    } else if ((a == 0) && (b == 0)) {
-        one = ("")
-        two = ("")
+    if ((digitNumber(n) >= 3)) {
+        when (c) {
+            0 -> three = ("")
+            in 1..9 -> three = words[26 + c]
+        }
+    } else {
+        three = ("")
     }
 
-
-//qq
+    when (a) {
+        0 -> one = ("")
+        in 1..9 -> one = words[a - 1]
+    }
+    when (b) {
+        0 -> two = ("")
+        1 -> {
+            one = ("")
+            two = words[9 + a]
+        }
+        in 2..9 -> two = words[17 + b]
+    }
     if ((e == 0) && (digitNumber(n) >= 4)) {
         when (d) {
             0 -> four = ("")
-            1 -> four = first[36]
-            2 -> four = first[39] + first[37]
-            3, 4 -> four = first[d - 1] + first[37]
-            in 5..9 -> four = first[d - 1] + first[38]
+            1 -> four = words[36]
+            2 -> four = words[39] + words[37]
+            3, 4 -> four = words[d - 1] + words[37]
+            in 5..9 -> four = words[d - 1] + words[38]
         }
     } else if (digitNumber(n) >= 5) {
         when (e) {
-            1 -> five = first[9 + d] + first[38]
-            2 -> five = first[19] + first[39] + first[37]
-            3, 4 -> five = first[19] + first[d - 1] + first[37]
-            in 5..9 -> five = first[19] + first[d - 1] + first[38]
+            1 -> five = words[9 + d] + words[38]
+            2 -> five = words[19] + words[39] + words[37]
+            3, 4 -> five = words[19] + words[d - 1] + words[37]
+            in 5..9 -> five = words[19] + words[d - 1] + words[38]
         }
     }
-    six = if (digitNumber(n) >= 6) {
-        first[26 + g]
-    } else
-        ("")
+    six = if ((digitNumber(n) >= 6) && (e == 0) && (d == 0)) {
+        words[26 + g] + words[38]
+    } else if (digitNumber(n) >= 6) {
+        words[26 + g]
+    } else ("")
     return ("$six$five$four$three$two$one").trim()
 }
 
