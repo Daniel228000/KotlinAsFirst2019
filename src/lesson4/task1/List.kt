@@ -128,10 +128,10 @@ fun abs(v: List<Double>): Double = TODO()
 
 
 fun mean(list: List<Double>): Double {
-    if (list.isNotEmpty()) {
-        return (list.sum() / list.size)
+    return if (list.isNotEmpty()) {
+        (list.sum() / list.size)
     } else
-        return 0.0
+        0.0
 }
 
 /**
