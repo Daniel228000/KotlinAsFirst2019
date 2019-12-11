@@ -82,8 +82,7 @@ fun dateStrToDigit(str: String): String {
         val date2 = month(parts[1])
         val date3 = parts[2].toInt()
         if (date1 > daysInMonth(date2, date3)) return ("")
-        //throwForIllegal(date1, date2, date3)
-        String.format("%02d.%02d.%02d", date1, date2, date3)
+        String.format("%02d.%02d.%d", date1, date2, date3)
     } catch (e: NumberFormatException) {
         ("")
     }
@@ -190,6 +189,7 @@ fun bestLongJump(jumps: String): Int {
     var result = -1
     val parts = jumps.split(" ")
     for (part in parts) {
+        if (parts.isEmpty()) return -1
         if ((part[0] in '0'..'9') || (part == ("%")) || (part == ("-"))) {
             if ((part[0] in '0'..'9') && (part.toInt() > result)) result = part.toInt()
         } else
@@ -231,6 +231,7 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int {
+    require(!expression.isEmpty())
     val parts = expression.split(" ")
     var sum = 0
     if (parts[0][0] in '0'..'9') {
@@ -292,7 +293,7 @@ fun mostExpensive(description: String): String {
         val tovars = part.split(" ")
         if (tovars.size == 2) {
             if ((tovars[0][0] !in '0'..'9') && (tovars[1][0] in '0'..'9')) {
-                if (tovars[1].toDouble() > max) {
+                if (tovars[1].toDouble() >= max) {
                     max = tovars[1].toDouble()
                     name = tovars[0]
                 }
