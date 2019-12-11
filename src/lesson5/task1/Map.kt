@@ -270,8 +270,9 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     var c = 0
     for (i in word) {
-        if ((i !in chars) || (i.toUpperCase() !in chars))
-            c += 1
+        c += if ((i in chars) || (i.toUpperCase() in chars)) {
+            0
+        } else 1
     }
     return c == 0
 }
