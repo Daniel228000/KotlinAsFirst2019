@@ -2,6 +2,9 @@
 
 package lesson5.task1
 
+import java.io.File.separator
+import kotlin.math.min
+
 /**
  * Пример
  *
@@ -237,7 +240,18 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var min = 10000000000000.0
+    var final = ""
+    for ((name, pair) in stuff) {
+        if ((pair.first == kind) && (pair.second <= min)) {
+            min = pair.second
+            final = name
+        }
+    }
+    return if (final == "") null
+    else final
+}
 
 /**
  * Средняя
@@ -272,11 +286,12 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
  */
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val final = mutableMapOf<String, Int>()
+    val same = final
     for (literal in list) {
-        final[literal] = final[literal] ?: 0 + 1
-    }
-    for ((key, number) in final) {
-        if (number == 1) final - key
+        same[literal] = (same[literal] ?: 0) + 1
+        if (same[literal]!! > 1) {
+            final[literal] = (same[literal] ?: 0)
+        }
     }
     return final
 }
@@ -291,10 +306,10 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
 fun hasAnagrams(words: List<String>): Boolean {
-    val literals = setOf<Char>()
+    val literals = mutableListOf<Char>()
     var flag = false
     for (element in words) {
-        literals + element.toSet()
+        literals + literalList(element)
     }
     for (element in words) {
         literals - element.toSet()
@@ -305,7 +320,7 @@ fun hasAnagrams(words: List<String>): Boolean {
     return flag
 }
 
-fun canBuildFromForAnagrams(chars: Set<Char>, word: String): Boolean {
+fun canBuildFromForAnagrams(chars: List<Char>, word: String): Boolean {
     var c = 0
     for (i in word) {
         if (i !in chars)
@@ -346,7 +361,20 @@ fun literalList(word: String): List<Char> {
  *          "Mikhail" to setOf("Sveta", "Marat")
  *        )
  */
-fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
+fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
+    var final = friends
+    for ((name, names) in final) {
+        for (sky in names) {
+            final[name] += final[sky]
+
+        }
+
+    }
+
+
+
+
+}
 
 /**
  * Сложная
@@ -365,7 +393,19 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val fullList = setOf<Int>()
+    val endGame = -1 to -1
+    for (i in 0..list.size - 2) {
+        for (j in 1 until list.size) {
+            if (list[i] + list[j] == number) {
+                return i to j
+            }
+        }
+    }
+    return endGame
+}
+
 
 /**
  * Очень сложная
@@ -389,3 +429,6 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
  *   ) -> emptySet()
  */
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+
+
+
