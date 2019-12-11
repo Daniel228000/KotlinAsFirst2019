@@ -361,20 +361,7 @@ fun literalList(word: String): List<Char> {
  *          "Mikhail" to setOf("Sveta", "Marat")
  *        )
  */
-fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
-    var final = friends
-    for ((name, names) in final) {
-        for (sky in names) {
-            final[name] += final[sky]
-
-        }
-
-    }
-
-
-
-
-}
+fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
 
 /**
  * Сложная
