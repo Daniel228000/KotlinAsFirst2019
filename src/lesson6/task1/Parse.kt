@@ -147,7 +147,7 @@ fun dateDigitToStr(digital: String): String {
     }
     return if (parts[0].toInt() > daysInMonth(month(parts[1]), parts[2].toInt())) ("")
     else
-        String.format("%02d %02d %02d", parts[0], monthRevert(parts[1]), parts[2])
+        String.format("%02d %02d %d", parts[0], monthRevert(parts[1]), parts[2])
 }
 
 /**
@@ -187,6 +187,7 @@ fun flattenPhoneNumber(phone: String): String {
  */
 fun bestLongJump(jumps: String): Int {
     var result = -1
+    if (jumps.isEmpty()) return -1
     val parts = jumps.split(" ")
     for (part in parts) {
         if (parts.isEmpty()) return -1
@@ -231,8 +232,9 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int {
-    require(!expression.isEmpty())
+    require(expression.isNotEmpty())
     val parts = expression.split(" ")
+    require(parts.size >= 3)
     var sum = 0
     if (parts[0][0] in '0'..'9') {
         sum += parts[0].toInt()
