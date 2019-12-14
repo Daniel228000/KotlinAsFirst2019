@@ -114,6 +114,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
     var l = 0
+    if (a == b) return true
     for ((key, value) in b) {
         if ((a[key] == value) || (a.isEmpty() && b.isEmpty())) {
             l += 1
@@ -245,7 +246,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *   ) -> "Мария"
  */
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var min = 10000000000000.0
+    var min = 1000000000000000.0
     var final = ""
     if (kind.isEmpty()) return ""
     for ((name, pair) in stuff) {
