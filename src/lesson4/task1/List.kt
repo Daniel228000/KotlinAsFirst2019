@@ -397,7 +397,7 @@ fun russian(n: Int): String {
         1 -> {
             one = ("")
             two = words[9 + a]
-        }
+         }
         in 2..9 -> two = words[17 + b]
     }
     if ((e == 0) && (digitNumber(n) >= 4)) {
@@ -411,9 +411,14 @@ fun russian(n: Int): String {
     } else if (digitNumber(n) >= 5) {
         when (e) {
             1 -> five = words[9 + d] + words[38]
-            2 -> five = words[19] + words[39] + words[37]
-            3, 4 -> five = words[19] + words[d - 1] + words[37]
-            in 5..9 -> five = words[19] + words[d - 1] + words[38]
+            in 2..9 -> five = words[17 + e] + when (d) {
+                0 -> words[38]
+                1 -> words[36]
+                2 -> words[39] + words[37]
+                3, 4 -> words[d - 1] + words[37]
+                in 5..9 -> words[d - 1] + words[38]
+                else -> ""
+            }
         }
     }
     six = if ((digitNumber(n) >= 6) && (e == 0) && (d == 0)) {
