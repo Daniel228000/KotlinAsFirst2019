@@ -116,9 +116,11 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
     var l = 0
     if (a == b) return true
     for ((key, value) in b) {
-        if ((a[key] == value) || (a.isEmpty() && b.isEmpty())) {
-            l += 1
-        }
+        if (a.isNotEmpty() && b.isNotEmpty()) {
+            if ((a[key] == value) || (a.isEmpty() && b.isEmpty())) {
+                l += 1
+            }
+        } else if (a.isEmpty() && b.isNotEmpty()) return true
     }
     return l != 0
 }
@@ -155,20 +157,25 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<Strin
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
-    val both = mutableListOf<String>()
-    for (man1 in a) {
-        for (man2 in b) {
-            if ((man1 == man2) && (man1 !in both)) {
-                both.add(man1)
-            }
-        }
-        if (both.size > 0) {
-            return both
-        }
-    }
+    var both = mutableListOf<String>()
+    both = a.intersect(b).toMutableList()
     return both
 }
 
+
+//    for (man1 in a) {
+//        for (man2 in b) {
+//            if ((man1 == man2) && (man1 !in both)) {
+//                both.add(man1)
+//            }
+//        }
+//        if (both.size > 0) {
+//            return both
+//        }
+//    }
+//    return both
+//}
+//
 
 /**
  * Средняя
@@ -248,13 +255,14 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     var min = 1000000000000000.0
     var final = ""
-    if (kind.isEmpty()) return null
     for ((name, pair) in stuff) {
         if ((pair.first == kind) && (pair.second <= min)) {
+            if (pair.first.isEmpty() && kind.isEmpty()) return ""
             min = pair.second
             final = name
         }
     }
+    if (kind.isEmpty()) return null
     return if (final == "") null
     else final
 }
@@ -313,20 +321,23 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
 fun hasAnagrams(words: List<String>): Boolean {
-    val literals = mutableListOf<Char>()
-    var flag = false
-    for (element in words) {
-        literals + literalList(element)
-    }
-    for (element in words) {
-        literals - element.toSet()
-        flag = canBuildFromForAnagrams(literals, element)
-        literals + element.toSet()
-        if (flag) return true
-    }
-    return flag
+    val literals = words.map { it.toList().sorted() }
+    return literals.toSet().size != words.size
 }
-
+//    val literals = mutableListOf<Char>()
+//    var flag = false
+//    for (element in words) {
+//        literals + literalList(element)
+//    }
+//    for (element in words) {
+//        literals - element.toSet()
+//        flag = canBuildFromForAnagrams(literals, element)
+//        literals + element.toSet()
+//        if (flag) return true
+//    }
+//    return flag
+//}
+//
 fun canBuildFromForAnagrams(chars: List<Char>, word: String): Boolean {
     var c = 0
     for (i in word) {
@@ -336,12 +347,12 @@ fun canBuildFromForAnagrams(chars: List<Char>, word: String): Boolean {
     }
     return c == 0
 }
-
-fun literalList(word: String): List<Char> {
-    val final = mutableListOf<Char>()
-    for (i in word) final.add(i)
-    return final
-}
+//
+//fun literalList(word: String): List<Char> {
+//    val final = mutableListOf<Char>()
+//    for (i in word) final.add(i)
+//    return final
+//}
 
 
 /**
