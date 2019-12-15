@@ -156,11 +156,11 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<Strin
  * В выходном списке не должно быть повторяюихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
-    var both = mutableListOf<String>()
-    both = a.intersect(b).toMutableList()
-    return both
-}
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.toSet().intersect(b.toSet()).toList()
+//    var both = mutableListOf<String>()
+//    both = a.intersect(b).toMutableList()
+//    return both
+//}
 
 
 //    for (man1 in a) {
@@ -401,7 +401,7 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     val endGame = -1 to -1
     for (i in 0..list.size - 2) {
-        for (j in 1 until list.size) {
+        for (j in i + 1 until list.size) {
             if (list[i] + list[j] == number) {
                 return i to j
             }

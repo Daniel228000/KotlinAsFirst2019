@@ -54,6 +54,24 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+//    var endGame = mutableMapOf<String, Int>()
+//    for (string in substrings) endGame[string] = 0
+//    for (line in File(inputName).readLines()) {
+//        for ((string, number) in endGame) {
+//            if (line.contains(Regex("""$string"""))) number += 1
+//        }
+//
+//
+//
+//
+//
+//    }
+//
+//
+//
+//
+//
+//}
 
 
 /**
@@ -399,6 +417,7 @@ fun markdownToHtml(inputName: String, outputName: String) {
 +235
 -----
  2350
+ *
  *
  */
 fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
