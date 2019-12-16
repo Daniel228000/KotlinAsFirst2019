@@ -56,9 +56,10 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
     var endGame = mutableMapOf<String, Int>()
-    for (string in substrings) endGame[string] = 0
+    val strings = substrings
+    for (string in strings) endGame[string] = 0
     for (line in File(inputName).readLines()) {
-        for (string in substrings) {
+        for (string in strings) {
             val lineLow = line.toLowerCase()
             val stringLow = string.toLowerCase()
             var startIndex = 0
@@ -312,15 +313,17 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  *
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
-fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    TODO()//var tratata = mutableListOf<String>("<i>", "</i>", "<b>", "</b>", "<s>", "</s>")
-    //   for (line in File(inputName).readLines()) { val parts = line.split(" ")
-    //       for (part in parts) { if (part.contains(Regex("""^*"""))) part[0] = tratata[0].first()
-    //       }
-    //
-    //
-    //   }
-    //
+fun markdownToHtmlSimple(inputName: String, outputName: String) { TODO()
+//    var tratata = mutableListOf<String>("<i>", "</i>", "<b>", "</b>", "<s>", "</s>")
+//    for (line in File(inputName).readLines()) {
+//        val parts = line.split(" ")
+//        for (part in parts) {
+//            if (part.contains(Regex("""^*"""))) part[0] = tratata[0].first()
+//        }
+//
+//
+//    }
+//
 }
 
 /**
