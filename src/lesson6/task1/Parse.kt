@@ -233,6 +233,7 @@ fun bestHighJump(jumps: String): Int {
  */
 fun plusMinus(expression: String): Int {
     require(expression.isNotEmpty())
+    if (expression[0] in '0'..'9') return expression.toInt()
     val parts = expression.split(" ")
     require(parts.size >= 3)
     var sum = 0
