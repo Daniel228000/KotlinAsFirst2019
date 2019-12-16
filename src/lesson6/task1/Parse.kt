@@ -165,10 +165,11 @@ fun dateDigitToStr(digital: String): String {
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
 fun flattenPhoneNumber(phone: String): String {
+    if (phone.all { it in '0'..'9' }) return phone
     var endGame = ("")
     for (i in phone) {
         if ((i in '0'..'9') || (i == '(') || (i == ')') || (i == '+') || (i == '-') || (i == ' ')) {
-            if ((i == '+') || (i in '0'..'9')) endGame + i
+            if ((i == '+') || (i in '0'..'9')) endGame += i
         } else
             return ("")
     }
@@ -187,16 +188,20 @@ fun flattenPhoneNumber(phone: String): String {
  */
 fun bestLongJump(jumps: String): Int {
     var result = -1
+    var c = 0
     if (jumps.isEmpty()) return -1
     val parts = jumps.split(" ")
     for (part in parts) {
         if (parts.isEmpty()) return -1
         if ((part[0] in '0'..'9') || (part == ("%")) || (part == ("-"))) {
-            if ((part[0] in '0'..'9') && (part.toInt() > result)) result = part.toInt()
+            if ((part[0] in '0'..'9') && (part.toInt() > result)) {
+                c += 1
+                result = part.toInt()
+            }
         } else
             return -1
     }
-    return result
+    return if (c > 0) result else -1
 }
 
 /**
@@ -232,10 +237,11 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int {
-    require(expression.isNotEmpty())
-    if (expression[0] in '0'..'9') return expression.toInt()
+    if (expression.isEmpty()) throw IllegalArgumentException()
+    var c = 0
+    if (expression.all { (it in '0'..'9') }) return expression.toInt()
     val parts = expression.split(" ")
-    require(parts.size >= 3)
+    if (parts.size <= 3) throw IllegalArgumentException()
     var sum = 0
     if (parts[0][0] in '0'..'9') {
         sum += parts[0].toInt()

@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import lesson5.task1.mergePhoneBooks
 import lesson8.task1.lineByPoints
 import java.io.File
 
@@ -64,7 +65,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
             val stringLow = string.toLowerCase()
             var startIndex = 0
             var index = lineLow.indexOf(stringLow, startIndex)
-            while (index > -1) {
+            while (index != -1) {
                 endGame[string] = endGame[string]!! + 1
                 startIndex = index + 1
                 index = lineLow.indexOf(stringLow, startIndex)
@@ -149,7 +150,60 @@ fun centerFile(inputName: String, outputName: String) {
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+//    val linesLengths = mutableMapOf<String, Int>()
+//    val text = mutableListOf<String>()
+//    for (line in File(inputName).readLines()) {
+//        var max = 0
+//        if (line.trim().length < max) {
+//            val words = line.trim().split(" ").filter { it.isNotEmpty() }.toMutableList()
+//            var wordsLength = 0
+//            for (word in words) {
+//                wordsLength += word.length
+//            }
+//            while (wordsLength < max) {
+//                for (i in 0..words.size - 2) {
+//                    words[i] = words[i] + " "
+//                    wordsLength += 1
+//                }
+//            }
+//            var stringFromWords = ""
+//            for (word in words) stringFromWords + word
+//            text += stringFromWords
+//        } else
+//            max = line.trim().length
+//        for (i in text.indices) {
+//            val parts = text[i].trim().split(" ").filter { it.isNotEmpty() }.toMutableList()
+//            var partsLength = 0
+//            for (part in parts) {
+//                partsLength += part.length
+//            }
+//            while (partsLength < max) {
+//                for (i in 0..parts.size - 2) {
+//                    parts[i] = parts[i] + " "
+//                    partsLength += 1
+//                }
+//            }
+//            var stringFromParts = ""
+//            val book = mutableListOf<String>()
+//            for (part in parts) stringFromParts + part
+//            text[i] = stringFromParts
+//        }
+//        text += line.trim()
+//    }
+//    File(outputName).bufferedWriter().use { it.write(text.joinToString()) }
+//}
+//    for (line in File(inputName).readLines()) {
+//        val words = line.trim().split(" ").filter { it.isNotEmpty() }.toMutableList()
+//        line.trim()
+//        var length = line.length
+//        while (length <= max) {
+//            for (i in 0..words.size - 2) {
+//                words[i] = words[i] + " "
+//                length += 1
+//            }
+//        }
+//        text += words
+//    }
 }
 
 /**
@@ -173,16 +227,27 @@ fun alignFileByWidth(inputName: String, outputName: String) {
 fun top20Words(inputName: String): Map<String, Int> {
     val endGame = mutableMapOf<String, Int>()
     for (line in File(inputName).readLines()) {
-        val words =
-            line.split("""[+)(*&^%$#@!~0123456789\s]""".toRegex())
-                .filter { it.isNotEmpty() }.map { it.toLowerCase() }
-                .filter { it.contains(Regex("""[a-zA-Zа-яА-Я]""")) }
+        val words = Regex("""[^a-zA-Zа-яА-ЯёЁ]+""").split(line)
+            .map { it.toLowerCase() }.filter { it.isNotEmpty() }
         for (word in words) {
             endGame[word] = (endGame[word] ?: 0) + 1
         }
     }
-    return endGame.toList().take(20).toMap()
+    return endGame.toList().sortedByDescending { it.second }.take(20).toMap()
+
 }
+//   var final = mutableMapOf<String, Int>()
+//   if (endGame.size <= 20) {
+//       return endGame
+//   } else for ((i, n) in endGame) {
+//       var c = 0
+//       while (c <= 20) {
+//           final[i] = endGame[i]
+//           c += 1
+//       }
+//   }
+//   return final
+
 
 /**
  * Средняя
@@ -313,17 +378,26 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  *
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
-fun markdownToHtmlSimple(inputName: String, outputName: String) { TODO()
-//    var tratata = mutableListOf<String>("<i>", "</i>", "<b>", "</b>", "<s>", "</s>")
-//    for (line in File(inputName).readLines()) {
-//        val parts = line.split(" ")
-//        for (part in parts) {
-//            if (part.contains(Regex("""^*"""))) part[0] = tratata[0].first()
-//        }
+fun markdownToHtmlSimple(inputName: String, outputName: String) {
+    TODO()
+    //   var tratata = mutableListOf("<i>", "</i>", "<b>", "</b>", "<s>", "</s>")
+    //   for (line in File(inputName).readLines()) {
+    //       val words = line.split(" ")
+//
+    //       for (part in words) {
+    //           if (part.contains(Regex("""^[\*]"""))) part = tratata[0] + part
+    //           if (part.contains(Regex("""*$"""))) part.toMutableList()[0] = tratata[0].first()
+    //           if (part.contains(Regex("""^[**]"""))) part.toMutableList()[0] = tratata[0].first()
+    //           if (part.contains(Regex("""^*"""))) part.toMutableList()[0] = tratata[0].first()
+    //           if (part.contains(Regex("""^`"""))) part.toMutableList()[0] = tratata[0].first()
+    //           if (part.contains(Regex("""^`$"""))) part.toMutableList()[0] = tratata[0].first()
 //
 //
-//    }
+    //       }
 //
+//
+    //   }
+
 }
 
 /**

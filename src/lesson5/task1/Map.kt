@@ -324,6 +324,7 @@ fun hasAnagrams(words: List<String>): Boolean {
     val literals = words.map { it.toList().sorted() }
     return literals.toSet().size != words.size
 }
+
 //    val literals = mutableListOf<Char>()
 //    var flag = false
 //    for (element in words) {
@@ -379,7 +380,16 @@ fun canBuildFromForAnagrams(chars: List<Char>, word: String): Boolean {
  *          "Mikhail" to setOf("Sveta", "Marat")
  *        )
  */
-fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
+fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> { TODO()
+//    var result = friends.toMutableMap()
+//    for ((name, set) in friends) {
+//        for (i in set.indices) {
+//            result[name] += friends[set[i]]!!
+//        }
+//    }
+//
+//return result
+}
 
 /**
  * Сложная
