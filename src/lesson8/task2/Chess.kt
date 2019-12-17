@@ -152,7 +152,13 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Пример: kingMoveNumber(Square(3, 1), Square(6, 3)) = 3.
  * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
  */
-fun kingMoveNumber(start: Square, end: Square): Int { TODO()
+fun kingMoveNumber(start: Square, end: Square): Int {
+    require(!((!start.inside()) || (!end.inside())))
+    val x = abs(start.column - end.column)
+    val y = abs(start.row - end.row)
+    return kotlin.math.max(x, y)
+
+
 //    require(!((!start.inside()) || (!end.inside())))
 //    if (start == end) return 0
 //    return when {
