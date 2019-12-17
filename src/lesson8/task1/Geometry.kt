@@ -3,6 +3,7 @@
 package lesson8.task1
 
 import lesson1.task1.sqr
+import java.lang.IllegalArgumentException
 import kotlin.math.*
 
 /**
@@ -154,7 +155,14 @@ class Line private constructor(val b: Double, val angle: Double) {
      * Найти точку пересечения с другой линией.
      * Для этого необходимо составить и решить систему из двух уравнений (каждое для своей прямой)
      */
-    fun crossPoint(other: Line): Point = TODO()
+    fun crossPoint(other: Line): Point {
+        val sin = sin(angle - other.angle)
+        val x = (other.b * cos(angle) - b * cos(other.angle)) / sin
+        val y = -((b * sin(other.angle) - other.b * sin(angle)) / sin)
+        return Point(x, y)
+
+
+    }
 
     override fun equals(other: Any?) = other is Line && angle == other.angle && b == other.b
 
@@ -216,7 +224,12 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * (построить окружность по трём точкам, или
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
-fun circleByThreePoints(a: Point, b: Point, c: Point): Circle = TODO()
+fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
+    val center = bisectorByPoints(a, b).crossPoint(bisectorByPoints(a, c))
+    val radius = a.distance(center)
+    return Circle(center, radius)
+}
+
 
 /**
  * Очень сложная
@@ -229,5 +242,27 @@ fun circleByThreePoints(a: Point, b: Point, c: Point): Circle = TODO()
  * три точки данного множества, либо иметь своим диаметром отрезок,
  * соединяющий две самые удалённые точки в данном множестве.
  */
-fun minContainingCircle(vararg points: Point): Circle = TODO()
-
+fun minContainingCircle(vararg points: Point): Circle { TODO()
+//    if (points.size == 1) return Circle(points[0], 0.0)
+//    require(points.isNotEmpty())
+//var m: Point
+//    var n: Point
+//    var max = points[0].distance(points[1])
+//    for (i in 0..points.size - 2) {
+//        for (j in (i + 1) until points.size) {
+//            if (points[i].distance(points[j]) >= max) {
+//                max = points[i].distance(points[j])
+//                m = points[i]
+//                n = points[j]
+//            }
+//        }
+//    }
+//    val p = points.toList()
+//    var minCircle = circleByThreePoints(points[0], points[1], points[2])
+//    for (i in 3 until points.size) if (!minCircle.contains(points[i])) minCircle =
+//        return minCircle
+//}
+//
+//fun minCircleWithFromNext(p: List<Point>, newPoint: Point): Circle {
+//
+}
