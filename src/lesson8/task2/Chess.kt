@@ -2,6 +2,8 @@
 
 package lesson8.task2
 
+import kotlin.math.abs
+
 /**
  * Клетка шахматной доски. Шахматная доска квадратная и имеет 8 х 8 клеток.
  * Поэтому, обе координаты клетки (горизонталь row, вертикаль column) могут находиться в пределах от 1 до 8.
@@ -22,7 +24,10 @@ data class Square(val column: Int, val row: Int) {
      * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
      * Для клетки не в пределах доски вернуть пустую строку
      */
-    fun notation(): String = TODO()
+    fun notation(): String {
+        if (!inside()) return ""
+        return "${'a' + column - 1}$row"
+    }
 }
 
 /**
@@ -32,7 +37,10 @@ data class Square(val column: Int, val row: Int) {
  * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
  * Если нотация некорректна, бросить IllegalArgumentException
  */
-fun square(notation: String): Square = TODO()
+fun square(notation: String): Square {
+    require(!((notation.length != 2) || (notation[0] !in 'a'..'h') || (notation[1] !in '1'..'8')))
+    return Square(notation[0] - 'a' + 1, notation[1] - '1' + 1)
+}
 
 /**
  * Простая
@@ -57,7 +65,11 @@ fun square(notation: String): Square = TODO()
  * Пример: rookMoveNumber(Square(3, 1), Square(6, 3)) = 2
  * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
  */
-fun rookMoveNumber(start: Square, end: Square): Int = TODO()
+fun rookMoveNumber(start: Square, end: Square): Int {
+    require(!((!start.inside()) || (!end.inside())))
+    if (start == end) return 0
+    return if (start.column == end.column || start.row == end.row) 1 else 2
+}
 
 /**
  * Средняя
@@ -140,7 +152,18 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Пример: kingMoveNumber(Square(3, 1), Square(6, 3)) = 3.
  * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
  */
-fun kingMoveNumber(start: Square, end: Square): Int = TODO()
+fun kingMoveNumber(start: Square, end: Square): Int { TODO()
+//    require(!((!start.inside()) || (!end.inside())))
+//    if (start == end) return 0
+//    return when {
+//        start.column == end.column -> abs(start.row - end.row)
+//        start.row == end.row -> abs(start.column - end.column)
+//        abs(start.column - end.column) == abs(start.row - end.row) -> return abs(start.column - end.column)
+//        else -> if (abs(start.column - end.column) > abs(start.row - end.row)) abs(start.column - end.column) + abs(
+//            start.row - end.row
+//        ) else abs(start.row - end.row) + abs(start.column - end.column)
+//    }
+}
 
 /**
  * Сложная
